@@ -113,53 +113,80 @@ function DOMtoString(document_root) {
     return "未处理的url";
 }
 
-/**
- * 得到oc字号方法名，
- * @param {String} labFontWeightStr 字重Regular、Medium、Bold
- */
-function getOCFontMethodName(labFontWeightStr) {
-    //  Medium Bold
-    let ocFontMethodName = 'pFSize';
-    if (labFontWeightStr === 'Regular') {
-        // 粗体
-        ocFontMethodName = 'fontWithName:@"PingFangSC-Regular" size';
-    } else if (labFontWeightStr === 'Medium') {
-        // 中体
-        ocFontMethodName = 'fontWithName:@"PingFangSC-Medium" size';
-    } else if (labFontWeightStr === 'Bold') {
-        // 粗体
-        ocFontMethodName = 'fontWithName:@"PingFangSC-Semibold" size';
-    } else {
-        // 使用系统默认的字体
-        ocFontMethodName = 'systemFontOfSize';
+
+function injectDom() {
+    var elementsByClassName = document.getElementsByClassName("layers_item");
+
+    for (let i = 0; i < elementsByClassName.length; i++) {
+        elementsByClassName[i].addEventListener('click', function () {
+            // 注入脚本时，自动发送消息getSource，调用DOMtoString方法给返回值
+            var doMtoString = DOMtoString(document);
+            copyStr(doMtoString)
+            // chrome.runtime.sendMessage({
+            //     action: "getSource",
+            //     source: doMtoString
+            // });
+        })
     }
-    return ocFontMethodName
 }
 
-function removeLoading() {
-    document.getElementsByClassName("visible")[0].remove()
-}
-
-/**
- * 移除csdn登录二维码
- */
-function removeCodeImg() {
-    document.getElementsByClassName('login-mark')[0].remove()
-    document.getElementsByClassName('login-box')[0].remove()
-}
-
-/**
- * 把博客园的博客的发布日期放标题上来
- */
-function moveReleaseDataToTop() {
-    let titleElement = document.getElementById('cb_post_title_url')
-    let dateElement = document.getElementById('post-date')
-    let title = titleElement.innerText
-    titleElement.innerText = title + ' 发布日期：' + dateElement.innerText
-}
 
 // 注入脚本时，自动发送消息getSource，调用DOMtoString方法给返回值
-chrome.runtime.sendMessage({
-    action: "getSource",
-    source: DOMtoString(document)
+// chrome.runtime.sendMessage({
+//     action: "getSource",
+//     source: DOMtoString(document)
+// });
+
+
+/// 复制字符串到粘贴板
+function copyStr(str) {
+    // 复制字符串到粘贴板 http://www.voidcn.com/article/p-effxpdwn-buc.html
+    var input = document.createElement('textarea');
+    document.body.appendChild(input);
+    input.value = str;
+    input.focus();
+    input.select();
+    document.execCommand('Copy');
+    input.remove();
+}
+
+function onWindowLoad() {
+    var observer = new MutationObserver(function (mutations, observer) {
+        injectDom()
+    });
+    var el = document.querySelector('.detail_box');
+    var options = {
+        'childList': true,
+        'attributes': true
+    };
+    observer.observe(el, options);
+// 创建并返回一个 MutationObserver 实例， 并侦听el元素的变动。
+
+
+}
+
+// 窗口载入时使用自己的载入函数
+window.onload = onWindowLoad;
+injectDom()
+
+/// 新加面板
+document.addEventListener('DOMContentLoaded', function () {
+
+    // injectDom();
+    // 默认配置
+    // var defaultConfig = {'op': 'oc_code', 'ocCode': 'btn'};
+    // 读取数据，第一个参数是指定要读取的key以及设置默认值
+    // chrome.storage.sync.get(defaultConfig, function (items) {
+    //     document.getElementById('op').value = items.op;
+    //     let ocCodeStr = items.ocCode;
+    //     if (ocCodeStr === 'img') {
+    //         img.checked = true;
+    //     } else if (ocCodeStr === 'btn') {
+    //         btn.checked = true;
+    //     } else if (ocCodeStr === 'lab') {
+    //         lab.checked = true;
+    //     } else if (ocCodeStr === 'line') {
+    //         showLine.checked = true;
+    //     }
+    // });
 });

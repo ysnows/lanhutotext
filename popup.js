@@ -1,17 +1,19 @@
 var title;
 var url;
-let img = document.getElementById('show_image');
-let btn = document.getElementById('show_btn');
-let lab = document.getElementById('show_lab');
+// let img = document.getElementById('show_image');
+// let btn = document.getElementById('show_btn');
+// let lab = document.getElementById('show_lab');
 
 /// document.getElementById('show_line');
-let showLine = document.getElementById('show_line');
+
+
 // 监听来消息 getSource
 chrome.runtime.onMessage.addListener(function (request, sender) {
     if (request.action === "getSource") {
         let contentStr = request.source;
-        message.innerText = contentStr;
-        copyStr(contentStr)
+        // message.innerText = contentStr;
+        // copyStr(contentStr)
+        // window.close()
 
         // if (url.includes('cnblogs.com')) {
         //   // 在博客完时，只是追加日期而，面板不用显示出来
@@ -279,20 +281,20 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
  * @param {String} hexColorStr 十六进制色的字符串如，#9A2037
  * @param {Number} alphaStr 透明度 100 70
  */
-function configBgColor(varName, hexColorStr, alphaStr) {
-    // 透明度
-    let returnCodeStr = `${varName}.backgroundColor = @"${hexColorStr}".hexColor;`
-    if (alphaStr / 100 != 1) {
-        // 透明度
-        returnCodeStr = `${varName}.backgroundColor = [@"${hexColorStr}".hexColor colorWithAlphaComponent: ${alphaStr / 100.0}];`
-    }
-    return returnCodeStr
-}
+// function configBgColor(varName, hexColorStr, alphaStr) {
+//     // 透明度
+//     let returnCodeStr = `${varName}.backgroundColor = @"${hexColorStr}".hexColor;`
+//     if (alphaStr / 100 != 1) {
+//         // 透明度
+//         returnCodeStr = `${varName}.backgroundColor = [@"${hexColorStr}".hexColor colorWithAlphaComponent: ${alphaStr / 100.0}];`
+//     }
+//     return returnCodeStr
+// }
 
 function onWindowLoad() {
 
     // 获取 popup.html里的元素进行字符串设定
-    var message = document.querySelector('#message');
+    // var message = document.querySelector('#message');
     // 获取 当前选择的tab的title 和 url
     chrome.tabs.getSelected(null, function (tab) {//获取当前tab
         title = tab.title;
@@ -314,30 +316,31 @@ window.onload = onWindowLoad;
 
 /// 新加面板
 document.addEventListener('DOMContentLoaded', function () {
+
     // 默认配置
-    var defaultConfig = {'op': 'oc_code', 'ocCode': 'btn'};
+    // var defaultConfig = {'op': 'oc_code', 'ocCode': 'btn'};
     // 读取数据，第一个参数是指定要读取的key以及设置默认值
-    chrome.storage.sync.get(defaultConfig, function (items) {
-        document.getElementById('op').value = items.op;
-        let ocCodeStr = items.ocCode;
-        if (ocCodeStr === 'img') {
-            img.checked = true;
-        } else if (ocCodeStr === 'btn') {
-            btn.checked = true;
-        } else if (ocCodeStr === 'lab') {
-            lab.checked = true;
-        } else if (ocCodeStr === 'line') {
-            showLine.checked = true;
-        }
-    });
+    // chrome.storage.sync.get(defaultConfig, function (items) {
+    //     document.getElementById('op').value = items.op;
+    //     let ocCodeStr = items.ocCode;
+    //     if (ocCodeStr === 'img') {
+    //         img.checked = true;
+    //     } else if (ocCodeStr === 'btn') {
+    //         btn.checked = true;
+    //     } else if (ocCodeStr === 'lab') {
+    //         lab.checked = true;
+    //     } else if (ocCodeStr === 'line') {
+    //         showLine.checked = true;
+    //     }
+    // });
 });
 // 复制代码事件
-document.getElementById('copyCode').addEventListener('click', function () {
-
-    let codeStr = document.getElementById('message').innerText;
-    copyStr(codeStr)
-
-});
+// document.getElementById('copyCode').addEventListener('click', function () {
+//
+//     let codeStr = document.getElementById('message').innerText;
+//     copyStr(codeStr)
+//
+// });
 
 /// 复制字符串到粘贴板
 function copyStr(str) {
@@ -352,50 +355,50 @@ function copyStr(str) {
 }
 
 // 保存配置事件
-document.getElementById('save').addEventListener('click', function () {
-    let op = document.getElementById('op').value;
-    let ocCodeStr = '';
-    if (img.checked) {
-        ocCodeStr = 'img';
-    } else if (btn.checked) {
-        ocCodeStr = 'btn';
-    } else if (lab.checked) {
-        ocCodeStr = 'lab';
-    } else if (showLine.checked) {
-        ocCodeStr = 'line';
-    }
-    let showImage = img.checked;
-    let saveDict = {
-        op: op,
-        ocCode: ocCodeStr
-    };
-    chrome.storage.sync.set(saveDict, function () {
-        document.getElementById('status').textContent = '保存成功！';
-        setTimeout(() => {
-            document.getElementById('status').textContent = '';
-        }, 800);
-    });
-});
+// document.getElementById('save').addEventListener('click', function () {
+//     let op = document.getElementById('op').value;
+//     let ocCodeStr = '';
+//     if (img.checked) {
+//         ocCodeStr = 'img';
+//     } else if (btn.checked) {
+//         ocCodeStr = 'btn';
+//     } else if (lab.checked) {
+//         ocCodeStr = 'lab';
+//     } else if (showLine.checked) {
+//         ocCodeStr = 'line';
+//     }
+//     let showImage = img.checked;
+//     let saveDict = {
+//         op: op,
+//         ocCode: ocCodeStr
+//     };
+//     chrome.storage.sync.set(saveDict, function () {
+//         document.getElementById('status').textContent = '保存成功！';
+//         setTimeout(() => {
+//             document.getElementById('status').textContent = '';
+//         }, 800);
+//     });
+// });
 
 // checked 事件互斥
 
-img.addEventListener('change', function () {
-    btn.checked = false;
-    lab.checked = false;
-    showLine.checked = false;
-});
-document.getElementById('show_btn').addEventListener('change', function () {
-    img.checked = false;
-    lab.checked = false;
-    showLine.checked = false;
-});
-document.getElementById('show_lab').addEventListener('change', function () {
-    img.checked = false;
-    btn.checked = false;
-    showLine.checked = false;
-});
-document.getElementById('show_line').addEventListener('change', function () {
-    img.checked = false;
-    btn.checked = false;
-    lab.checked = false;
-});
+// img.addEventListener('change', function () {
+//     btn.checked = false;
+//     lab.checked = false;
+//     showLine.checked = false;
+// });
+// document.getElementById('show_btn').addEventListener('change', function () {
+//     img.checked = false;
+//     lab.checked = false;
+//     showLine.checked = false;
+// });
+// document.getElementById('show_lab').addEventListener('change', function () {
+//     img.checked = false;
+//     btn.checked = false;
+//     showLine.checked = false;
+// });
+// document.getElementById('show_line').addEventListener('change', function () {
+//     img.checked = false;
+//     btn.checked = false;
+//     lab.checked = false;
+// });
