@@ -72,12 +72,22 @@ function DOMtoString(document_root) {
             fontSize = 'b' + fontSize
         }
 
-        let colorArr = getProperty(strArr, "颜色", 1, null, 2);
+        let colorArr = [0, 0];
+        let bgColorArr = [0, 0];
+        let borderColorArr = [0, 0];
+        if (strArr.indexOf("内边框") > -1) {
+            borderColorArr = getProperty(strArr, "颜色", 1, null, 2);
+        } else if (fontWeight === 0) {
+            bgColorArr = getProperty(strArr, "颜色", 1, null, 2);
+        } else {
+            colorArr = getProperty(strArr, "颜色", 1, null, 2);
+        }
         let widthHeightArr = getProperty(strArr, "大小", 1, 'pt', 2);
         let textContent = getProperty(strArr, "内容");
         let corner = getProperty(strArr, "圆角", 1, 'pt');
+        let borderWidth = getProperty(strArr, "粗细", 1, 'pt');
 
-        let res = [fontSize, colorArr, widthHeightArr, textContent, corner]
+        let res = [fontSize, colorArr, widthHeightArr, textContent, corner, bgColorArr, borderWidth, borderColorArr]
         return res.join('|')
 
     }
