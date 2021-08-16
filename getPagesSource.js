@@ -64,50 +64,22 @@ function DOMtoString(document_root) {
         // let viewWidth = frameStrs[6].replace('pt', '')
         // let viewHeight = frameStrs[7].replace('pt', '')
 
+
+        // Medium|14|#2A2A2A,100%|142.5,14|计划有便，没时间消费|0
         let fontWeight = getProperty(strArr, "字重");
         let fontSize = getProperty(strArr, "字号", 1, 'pt');
+        if (fontWeight === 'Medium' || fontWeight === 'Bold') {
+            fontSize = 'b' + fontSize
+        }
+
         let colorArr = getProperty(strArr, "颜色", 1, null, 2);
         let widthHeightArr = getProperty(strArr, "大小", 1, 'pt', 2);
         let textContent = getProperty(strArr, "内容");
         let corner = getProperty(strArr, "圆角", 1, 'pt');
 
-        return [fontWeight, fontSize, colorArr, widthHeightArr, textContent, corner];
+        let res = [fontSize, colorArr, widthHeightArr, textContent, corner]
+        return res.join('|')
 
-        // if (!codeStr.startsWith('代码')) {
-        //     // UIImageView
-        //     return [viewX, viewY]
-        // } else {
-        //     if (codeStr.includes('UILabel')) {
-        //         // UILabel
-        //         //字重
-        //         let fontWeight = propertyStrs[3]
-        //         if (propertyStrs[4] === '对齐') {
-        //             //对齐方式
-        //             // let fontWeight = getOCFontMethodName(propertyStrs[3])
-        //         }
-        //         //字体大小
-        //         let fontSize = propertyStrs[23].replace('pt', '')
-        //         //文字内容
-        //         let contentStr = propertyStrs[32]
-        //         // document.getElementsByClassName('item_one item_content')[0].textContent
-        //         //文字颜色
-        //         let textColorHex = propertyStrs[8]
-        //         //文字颜色透明度
-        //         let textColorAlpha = propertyStrs[9]
-        //         return [viewX, viewY, viewWidth, viewHeight, contentStr, fontWeight, fontSize, textColorHex, textColorAlpha]
-        //     } else if (codeStr.includes('UIView')) {
-        //         // UIView
-        //         // 背景颜色 #9A2037
-        //         let bgColorHex = propertyStrs[1]
-        //         // 颜色透明度 100
-        //         let bgColorAlpha = propertyStrs[2].replace('%', '')
-        //
-        //         return [viewX, viewY, viewWidth, viewHeight, bgColorHex, bgColorAlpha, corner]
-        //
-        //     } else {
-        //         alert('未知类型' + codeStr)
-        //     }
-        // }
     }
 
     return "未处理的url";
@@ -172,21 +144,4 @@ injectDom()
 /// 新加面板
 document.addEventListener('DOMContentLoaded', function () {
 
-    // injectDom();
-    // 默认配置
-    // var defaultConfig = {'op': 'oc_code', 'ocCode': 'btn'};
-    // 读取数据，第一个参数是指定要读取的key以及设置默认值
-    // chrome.storage.sync.get(defaultConfig, function (items) {
-    //     document.getElementById('op').value = items.op;
-    //     let ocCodeStr = items.ocCode;
-    //     if (ocCodeStr === 'img') {
-    //         img.checked = true;
-    //     } else if (ocCodeStr === 'btn') {
-    //         btn.checked = true;
-    //     } else if (ocCodeStr === 'lab') {
-    //         lab.checked = true;
-    //     } else if (ocCodeStr === 'line') {
-    //         showLine.checked = true;
-    //     }
-    // });
 });
