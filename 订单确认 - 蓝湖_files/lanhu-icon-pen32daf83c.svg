@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59 (86127) - https://sketch.com -->
+    <title>lanhu-icon-pen</title>
+    <desc>Created with Sketch.</desc>
+    <g id="邀请链接" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="修改切图名称" transform="translate(-220.000000, -137.000000)">
+            <g id="默认备份" transform="translate(182.000000, 31.000000)">
+                <text id="插图2备份" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" letter-spacing="0.14" fill="#4A4A4A">
+                    <tspan x="0" y="119">插图2</tspan>
+                </text>
+                <g id="lanhu-icon-pen" opacity="0.5" transform="translate(38.000000, 106.000000)">
+                    <g id="Shape">
+                        <path d="M3.33333333,10.7224922 L3.33333333,12.6666667 L5.27750775,12.6666667 L11.0115262,6.93264824 L9.06735176,4.98847382 L3.33333333,10.7224922 Z M12.5150211,5.42915336 C12.7172152,5.22695922 12.7172152,4.90033792 12.5150211,4.69814378 L11.3018562,3.48497894 C11.0996621,3.2827848 10.7730408,3.2827848 10.5708466,3.48497894 L9.62208952,4.43373606 L11.5662639,6.37791048 L12.5150211,5.42915336 Z" fill="#0E1726"></path>
+                        <polygon points="0 0 16 0 16 16 0 16"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

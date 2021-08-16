@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59 (86127) - https://sketch.com -->
+    <title>lanhu-icon-successful</title>
+    <desc>Created with Sketch.</desc>
+    <g id="邀请链接" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="查看所有切图备份" transform="translate(-1254.000000, -484.000000)">
+            <g id="编组-2" transform="translate(1254.000000, 484.000000)">
+                <circle id="椭圆形" fill="#FFFFFF" cx="10.5" cy="9.5" r="7.5"></circle>
+                <g id="lanhu-icon-successful">
+                    <g>
+                        <path d="M10,1.66666667 C5.3975,1.66666667 1.66666667,5.3975 1.66666667,10 C1.66666667,14.6025 5.3975,18.3333333 10,18.3333333 C14.6025,18.3333333 18.3333333,14.6025 18.3333333,10 C18.3333333,5.3975 14.6025,1.66666667 10,1.66666667 Z M8.33333333,14.5116667 L4.41083333,10.5891667 L5.58916667,9.41083333 L8.33333333,12.155 L14.4108333,6.0775 L15.5891667,7.25583333 L8.33333333,14.5116667 Z" id="形状" fill="#2878FF"></path>
+                        <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="20" height="20"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
